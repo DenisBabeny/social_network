@@ -1,23 +1,22 @@
 import React from "react";
 import s from "./Dialogs.module.css"
-const Dialogs = ()=>{
+import {DialogsItems} from "./components/DialogsItems";
+import {Message} from "./components/message";
+
+const Dialogs = () => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <div className={s.dialog}>
-                Denis
-                </div><div className={s.dialog}>
-                Oleg
-                </div><div className={s.dialog}>
-                Alexander
-                </div><div className={s.dialog}>
-                Yana
-                </div>
+                <DialogsItems name={'Denis'} id={'1'}/>
+                <DialogsItems name={'Oleg'} id={'2'}/>
+                <DialogsItems name={'Alexander'} id={'3'}/>
+                <DialogsItems name={'Yana'} id={'4'}/>
+                <DialogsItems name={'M.Smite'} id={'5'}/>
             </div>
             <div className={s.messages}>
-                <div className={s.message}>Hi</div>
-                <div className={s.message}>How are you?</div>
-                <div className={s.message}>Yo</div>
+                <Message message={'Hi'}/>
+                <Message message={'How are you?'}/>
+                <Message message={'Yo'}/>
 
             </div>
 

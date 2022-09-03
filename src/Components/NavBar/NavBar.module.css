@@ -3,11 +3,13 @@
     background-color: blueviolet;
     padding: 20px;
 }
-.item{
+
+.item {
     color: aquamarine;
     text-decoration: none;
 }
-.active{
+
+.active {
     color: gold;
     text-decoration: none;
 }
