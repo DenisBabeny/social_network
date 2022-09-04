@@ -5,7 +5,7 @@ export const ProfileInfo = () => {
     return (
         <div>
             <div>
-                <img src={'https://ichef.bbci.co.uk/news/999/cpsprodpb/6D5A/production/_119449972_10.jpg'}
+                <img src={'https://w0.peakpx.com/wallpaper/133/71/HD-wallpaper-realistic-anime-girl-realistic-blonde-short-hair-anime.jpg'}
                      alt={'image'}/>
             </div>
             <div className={s.descriptionBlock}>

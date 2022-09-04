@@ -1,16 +1,15 @@
 .app-wrapper {
     display: grid;
-    width: 1200px;
+    width: 100%;
     grid-template-areas:
 "h h"
 "n c";
     grid-template-rows: 60px 1fr;
     grid-template-columns: 2fr 10fr;
-    grid-gap: 5px;
 }
 .app-wrapper-content{
     grid-area: c;
-    background-color: aquamarine;
+    background-image: url("https://w0.peakpx.com/wallpaper/559/184/HD-wallpaper-books-aesthetics-reading.jpg");
 }
 
 

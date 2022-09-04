@@ -1,6 +1,5 @@
 import s from "../Dialogs.module.css";
 import React from "react";
-
 type MessageType = {
     message: string
 }
