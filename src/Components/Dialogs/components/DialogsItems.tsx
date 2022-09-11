@@ -2,11 +2,11 @@ import s from "../Dialogs.module.css";
 import {NavLink} from "react-router-dom";
 import React from "react";
 
-export type DialogsMessageType={
+export type DialogsMessageType = {
     dialogsData: Array<any>
-    messageData:Array<any>
+    messageData: Array<any>
 }
- type DialogsItemsPropsType = {
+type DialogsItemsPropsType = {
     id: number
     name: string
 }
