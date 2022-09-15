@@ -1,14 +1,14 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import s from "./MyPosts.module.css"
 import Posts from "./Post/Posts";
 import {PostDataType} from "../Profile";
 
 
 const MyPosts = (props: PostDataType) => {
-    let postElements = props.postData.map((p) => <Posts message={p.message} likesCount={p.likesCount}/>)
+    const postElements = props.postData.map((p) => <Posts message={p.message} likesCount={p.likesCount}/>)
     const newPostElement = React.createRef<HTMLTextAreaElement>();
     const addPost = () => {
-        props.addPost(newPostElement.current ? newPostElement.current.value : '-----')
+        props.addPost(newPostElement.current ? newPostElement.current.value : '-----');
     }
 
     return (
