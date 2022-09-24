@@ -5,11 +5,13 @@ import NavBar from "./Components/NavBar/NavBar";
 import Profile from "./Components/Profile/Profile";
 import Dialogs from "./Components/Dialogs/Dialogs";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import {RootStateType, state} from "./Redax/state";
-import {addPost} from './Redax/state'
+import {StoreType} from "./Redax/state";
+type PropsType={
+    store:StoreType
+}
 
-
-function App(props: RootStateType) {
+const App: React.FC<PropsType>=(props)=>{
+    const state = props.store.getState()
     return (
         <BrowserRouter>
             <div className={"app-wrapper"}>
@@ -18,7 +20,9 @@ function App(props: RootStateType) {
                 <div className={"app-wrapper-content"}>
                     <Switch>
                         <Route path={'/profile'}
-                               render={() => <Profile postData={state.profilePage.posts} addPost={addPost}/>}/>
+                               render={() => <Profile profilePage={state.profilePage.posts}
+                                                      dispatch={props.store.dispatch.bind(props.store)}
+                               />}/>
                         <Route path={'/dialogs'}
                                render={() => <Dialogs dialogsData={state.dialogsPage.dialogs}
                                                       messageData={state.dialogsPage.messages}/>}/>

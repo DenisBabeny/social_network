@@ -1,20 +1,22 @@
-import React from "react";
+import React, {ChangeEvent, MouseEventHandler} from "react";
 import s from "./MyPosts.module.css"
 import Posts from "./Post/Posts";
 import {PostDataType} from "../Profile";
 
 
 const MyPosts = (props: PostDataType) => {
-    let postElements = props.postData.map((p) => <Posts message={p.message} likesCount={p.likesCount}/>)
+    const postElements = props.profilePage.map((p) => <Posts message={p.message} likesCount={p.likesCount}/>)
     const newPostElement = React.createRef<HTMLTextAreaElement>();
     const addPost = () => {
-        props.addPost(newPostElement.current ? newPostElement.current.value : '-----')
+        if(newPostElement.current) props.dispatch({type:"ADD-POST", postText: newPostElement.current.value})
     }
-
+    const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.dispatch({type:'CHANGE-NEW-TEXT', newText: e.currentTarget.value});
+    }
     return (
         <div className={s.postsBlock}>
             <div>
-                <textarea ref={newPostElement}></textarea>
+                <textarea onChange={onPostChange} ref={newPostElement}></textarea>
             </div>
 
             <button onClick={addPost}>add post</button>

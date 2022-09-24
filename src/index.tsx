@@ -1,7 +1,9 @@
 import React from 'react';
 import './index.css';
 import {renderEntireTree} from "./Render";
-import {state} from "./Redax/state";
+import {store} from "./Redax/state";
 
-renderEntireTree(state);
+renderEntireTree()
+store.subscribe(renderEntireTree);
+
 

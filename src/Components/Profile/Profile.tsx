@@ -1,17 +1,17 @@
 import React from "react";
 import MyPosts from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {addPost, PostType} from "../../Redax/state";
+import {ActionTypes, PostType} from "../../Redax/state";
 
 export type PostDataType = {
-    postData: Array<PostType>
-    addPost: (postText: string) => void
+    profilePage: Array<PostType>
+    dispatch:(action: ActionTypes)=>void
 }
 const Profile = (props: PostDataType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts postData={props.postData} addPost={addPost}/>
+            <MyPosts profilePage={props.profilePage} dispatch={props.dispatch} />
         </div>
     )
 }
