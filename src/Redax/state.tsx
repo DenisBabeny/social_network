@@ -20,6 +20,7 @@ type ProfilePageType = {
 type DialogPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
+    newMessageText:string
 }
 
 export type RootStateType = {
@@ -34,7 +35,7 @@ export type StoreType = {
     getState:()=>RootStateType
     dispatch:(action: ActionTypes)=>void
 }
-export type ActionTypes = ReturnType<typeof addPostActionCreator>|ReturnType<typeof changeNewTextActionCreator>
+export type ActionTypes = ReturnType<typeof addPostActionCreator>|ReturnType<typeof changeNewTextActionCreator>|ReturnType<typeof changeNewMessageTextActionCreator>|ReturnType<typeof addMessageActionCreator>
 
 
 export const addPostActionCreator = (postText:string)=>{
@@ -43,10 +44,22 @@ export const addPostActionCreator = (postText:string)=>{
         postText:postText
     } as const
 }
+export const addMessageActionCreator = (MessageText:string)=>{
+    return{
+        type: "ADD-MESSAGE",
+        postText:MessageText
+    } as const
+}
 export const changeNewTextActionCreator = (newText:string)=>{
     return{
         type:"CHANGE-NEW-TEXT",
         newText:newText
+    } as const
+}
+export const changeNewMessageTextActionCreator = (newText:string)=>{
+    return{
+        type:"CHANGE-NEW-TEXT-MESSAGE",
+        body:newText
     } as const
 }
 export const store: StoreType = {
@@ -74,7 +87,8 @@ export const store: StoreType = {
                 {id: 3, message: "Yo"},
                 {id: 4, message: "Yo"},
                 {id: 5, message: "Yo"}
-            ]
+            ],
+            newMessageText: ''
         }
     },
     renderEntireTree(){
@@ -100,6 +114,14 @@ export const store: StoreType = {
         } else if(action.type === "CHANGE-NEW-TEXT"){
             this._state.profilePage.messageForNewPost = action.newText;
             this.renderEntireTree();
+        } else if ( action.type === "CHANGE-NEW-TEXT-MESSAGE"){
+            this._state.dialogsPage.newMessageText = action.body
+            this.renderEntireTree();
+        }else if ( action.type === "ADD-MESSAGE"){
+            let body = this._state.dialogsPage.newMessageText
+            this._state.dialogsPage.messages.push({id:6, message:body})
+            this._state.dialogsPage.newMessageText = ''
+            this.renderEntireTree()
         }
     }
 }

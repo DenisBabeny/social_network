@@ -25,7 +25,9 @@ const App: React.FC<PropsType>=(props)=>{
                                />}/>
                         <Route path={'/dialogs'}
                                render={() => <Dialogs dialogsData={state.dialogsPage.dialogs}
-                                                      messageData={state.dialogsPage.messages}/>}/>
+                                                      messageData={state.dialogsPage.messages}
+                                                      dispatch = {props.store.dispatch.bind(props.store)}
+                               />}/>
                     </Switch>
                 </div>
 

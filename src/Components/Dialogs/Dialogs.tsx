@@ -1,16 +1,26 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css"
 import {DialogsItems, DialogsMessageType} from "./components/DialogsItems";
 import {Message} from "./components/message";
+import {
+    addMessageActionCreator,
+    addPostActionCreator,
+    changeNewMessageTextActionCreator,
+    changeNewTextActionCreator
+} from "../../Redax/state";
 
 const Dialogs = (props: DialogsMessageType) => {
 
     let dialogsElements = props.dialogsData.map((d) => <DialogsItems name={d.name} id={d.id}/>)
 
     let messagesElement = props.messageData.map((m) => <Message message={m.message}/>)
-    const newMessage = React.createRef<HTMLTextAreaElement>()
-    const addMessage = () => {
-        alert(newMessage.current?.value)
+    const newMessage =React.createRef<HTMLTextAreaElement>()
+    const onSendMessage = () => {
+        if(newMessage.current) props.dispatch(addMessageActionCreator(newMessage.current.value))
+    }
+    const onChangeMessage = (e:ChangeEvent<HTMLTextAreaElement>) => {
+        props.dispatch(changeNewMessageTextActionCreator(e.currentTarget.value));
+
     }
     return (
         <div className={s.dialogs}>
@@ -18,9 +28,18 @@ const Dialogs = (props: DialogsMessageType) => {
                 {dialogsElements}
             </div>
             <div className={s.messages}>
-                {messagesElement}
-                <textarea></textarea>
-                <button onClick={addMessage}>add</button>
+                <div>{messagesElement}</div>
+                <div>
+                    <div><textarea
+                                   placeholder={'Enter your message'}
+                                   onChange={onChangeMessage}
+                                   ref={newMessage}
+
+                    ></textarea></div>
+                    <div><button onClick={onSendMessage}>Send</button></div>
+                </div>
+
+
             </div>
 
         </div>
