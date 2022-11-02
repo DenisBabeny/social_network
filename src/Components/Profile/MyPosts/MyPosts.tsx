@@ -2,16 +2,17 @@ import React, {ChangeEvent, MouseEventHandler} from "react";
 import s from "./MyPosts.module.css"
 import Posts from "./Post/Posts";
 import {PostDataType} from "../Profile";
+import {addPostActionCreator, changeNewTextActionCreator} from "../../../Redax/state";
 
 
 const MyPosts = (props: PostDataType) => {
     const postElements = props.profilePage.map((p) => <Posts message={p.message} likesCount={p.likesCount}/>)
     const newPostElement = React.createRef<HTMLTextAreaElement>();
     const addPost = () => {
-        if(newPostElement.current) props.dispatch({type:"ADD-POST", postText: newPostElement.current.value})
+        if(newPostElement.current) props.dispatch(addPostActionCreator(newPostElement.current.value))
     }
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({type:'CHANGE-NEW-TEXT', newText: e.currentTarget.value});
+        props.dispatch(changeNewTextActionCreator(e.currentTarget.value));
     }
     return (
         <div className={s.postsBlock}>
