@@ -2,12 +2,7 @@ import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css"
 import {DialogsItems, DialogsMessageType} from "./components/DialogsItems";
 import {Message} from "./components/message";
-import {
-    addMessageActionCreator,
-    addPostActionCreator,
-    changeNewMessageTextActionCreator,
-    changeNewTextActionCreator
-} from "../../Redax/state";
+import {addMessageActionCreator, changeNewMessageTextActionCreator} from "../../Redax/Dialogs-Reducer";
 
 const Dialogs = (props: DialogsMessageType) => {
 

@@ -2,7 +2,8 @@ import React, {ChangeEvent, MouseEventHandler} from "react";
 import s from "./MyPosts.module.css"
 import Posts from "./Post/Posts";
 import {PostDataType} from "../Profile";
-import {addPostActionCreator, changeNewTextActionCreator} from "../../../Redax/state";
+import {addPostActionCreator, changeNewTextActionCreator} from "../../../Redax/Profile-Reducer";
+
 
 
 const MyPosts = (props: PostDataType) => {

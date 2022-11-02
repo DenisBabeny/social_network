@@ -1,3 +1,5 @@
+import {addPostActionCreator, changeNewTextActionCreator, ProfileReducer} from "./Profile-Reducer";
+import {addMessageActionCreator, changeNewMessageTextActionCreator, DialogsReducer} from "./Dialogs-Reducer";
 
 type MessageType = {
     id: number
@@ -12,15 +14,15 @@ export type PostType = {
     message: string
     likesCount: number
 }
-type ProfilePageType = {
+export type ProfilePageType = {
     posts: Array<PostType>
     messageForNewPost: string
 
 }
-type DialogPageType = {
+export type DialogPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
-    newMessageText:string
+    newMessageText: string
 }
 
 export type RootStateType = {
@@ -30,38 +32,16 @@ export type RootStateType = {
 
 export type StoreType = {
     _state: RootStateType
-    renderEntireTree:()=>void
-    subscribe:(callback: () => void)=>void
-    getState:()=>RootStateType
-    dispatch:(action: ActionTypes)=>void
+    renderEntireTree: () => void
+    subscribe: (callback: () => void) => void
+    getState: () => RootStateType
+    dispatch: (action: ActionTypes) => void
 }
-export type ActionTypes = ReturnType<typeof addPostActionCreator>|ReturnType<typeof changeNewTextActionCreator>|ReturnType<typeof changeNewMessageTextActionCreator>|ReturnType<typeof addMessageActionCreator>
-
-
-export const addPostActionCreator = (postText:string)=>{
-    return{
-        type: "ADD-POST",
-        postText:postText
-    } as const
-}
-export const addMessageActionCreator = (MessageText:string)=>{
-    return{
-        type: "ADD-MESSAGE",
-        postText:MessageText
-    } as const
-}
-export const changeNewTextActionCreator = (newText:string)=>{
-    return{
-        type:"CHANGE-NEW-TEXT",
-        newText:newText
-    } as const
-}
-export const changeNewMessageTextActionCreator = (newText:string)=>{
-    return{
-        type:"CHANGE-NEW-TEXT-MESSAGE",
-        body:newText
-    } as const
-}
+export type ActionTypes =
+    ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof changeNewTextActionCreator>
+    | ReturnType<typeof changeNewMessageTextActionCreator>
+    | ReturnType<typeof addMessageActionCreator>
 export const store: StoreType = {
     _state: {
         profilePage: {
@@ -91,37 +71,19 @@ export const store: StoreType = {
             newMessageText: ''
         }
     },
-    renderEntireTree(){
+    renderEntireTree() {
         console.log('State changed')
     },
 
-    subscribe(callback: () => void){
+    subscribe(callback: () => void) {
         this.renderEntireTree = callback;
     },
-    getState(){
+    getState() {
         return this._state
     },
-    dispatch(action){
-        if(action.type === "ADD-POST"){
-            const newPost:PostType ={
-                id: new Date().getTime(),
-                message: action.postText,
-                likesCount: 0
-
-            }
-            this._state.profilePage.posts.push(newPost)
-            this.renderEntireTree()
-        } else if(action.type === "CHANGE-NEW-TEXT"){
-            this._state.profilePage.messageForNewPost = action.newText;
-            this.renderEntireTree();
-        } else if ( action.type === "CHANGE-NEW-TEXT-MESSAGE"){
-            this._state.dialogsPage.newMessageText = action.body
-            this.renderEntireTree();
-        }else if ( action.type === "ADD-MESSAGE"){
-            let body = this._state.dialogsPage.newMessageText
-            this._state.dialogsPage.messages.push({id:6, message:body})
-            this._state.dialogsPage.newMessageText = ''
-            this.renderEntireTree()
-        }
+    dispatch(action) {
+        this._state.profilePage = ProfileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = DialogsReducer(this._state.dialogsPage, action)
+        this.renderEntireTree();
     }
 }
