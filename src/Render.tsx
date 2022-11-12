@@ -1,7 +1,7 @@
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import ReactDOM from "react-dom";
-import {store} from "./Redax/state";
+import {store} from "./Redux/redux-store";
 export const renderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
@@ -10,3 +10,4 @@ export const renderEntireTree = () => {
         document.getElementById('root')
     );
 }
+

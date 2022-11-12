@@ -76,6 +76,7 @@ export const store: StoreType = {
     },
 
     subscribe(callback: () => void) {
+
         this.renderEntireTree = callback;
     },
     getState() {

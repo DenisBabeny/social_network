@@ -1,7 +1,7 @@
 import React from "react";
 import MyPosts from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ActionTypes, PostType} from "../../Redax/state";
+import {ActionTypes, PostType} from "../../Redux/store";
 
 export type PostDataType = {
     profilePage: Array<PostType>

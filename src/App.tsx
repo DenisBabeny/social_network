@@ -5,9 +5,9 @@ import NavBar from "./Components/NavBar/NavBar";
 import Profile from "./Components/Profile/Profile";
 import Dialogs from "./Components/Dialogs/Dialogs";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import {StoreType} from "./Redax/state";
+import {StoreType} from "./Redux/store";
 type PropsType={
-    store:StoreType
+    store:any
 }
 
 const App: React.FC<PropsType>=(props)=>{

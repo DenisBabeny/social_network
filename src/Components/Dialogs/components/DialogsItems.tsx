@@ -1,7 +1,7 @@
 import s from "../Dialogs.module.css";
 import {NavLink} from "react-router-dom";
 import React from "react";
-import {ActionTypes} from "../../../Redax/state";
+import {ActionTypes} from "../../../Redux/store";
 
 export type DialogsMessageType = {
     dialogsData: Array<any>
